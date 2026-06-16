@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arquiteta Mariana Alcântara</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Arquiteta Mariana Alcântara. Projetos que unem estética, conforto e propósito. +400 ambientes criados em todo o Brasil." />
+    <meta name="keywords" content="arquitetura, design de interiores, projetos, mariana alcântara" />
+    <meta name="author" content="Mariana Alcântara" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://arquitetamariana.com.br/" />
+    <meta property="og:title" content="Arquiteta Mariana Alcântara | Projetos residenciais e ambientação" />
+    <meta property="og:description" content="Arquiteta especializada em projetos residenciais. Transforme seu ambiente com quem entende da união entre estética, conforto e propósito." />
+    <meta property="og:image" content="https://arquitetamariana.pages.dev/assets/meta-preview.webp" />
+    <meta property="og:image:width" content="1440" />
+    <meta property="og:image:height" content="810" />
+    <meta property="og:locale" content="pt_BR" />
+    
+
+    <link rel="preload" as="font" href="/assets/inter-FIwubZjA.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href="/assets/outfit-5OM8xsXA.woff2" type="font/woff2" crossorigin />
+
+    <link
+      rel="preload" 
+      as="image" 
+      href="/assets/ap1-375w-CKp6Z3Q2.webp"
+      imagesrcset="assets/header/ap1-375w.webp 375w, assets/header/ap1-768w.webp 768w, assets/header/ap1-1280w.webp 1280w, assets/header/ap1-1920w.webp 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    
+    <link
+      rel="preload" 
+      as="image" 
+      href="/assets/ap2-375w-C7-sWUQO.webp"
+      imagesrcset="assets/header/ap2-375w.webp 375w, assets/header/ap2-768w.webp 768w, assets/header/ap2-1280w.webp 1280w, assets/header/ap2-1920w.webp 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <link
+      rel="preload" 
+      as="image" 
+      href="/assets/ap3-375w-CpvTq9pw.webp"
+      imagesrcset="assets/header/ap3-375w.webp 375w, assets/header/ap3-768w.webp 768w, assets/header/ap3-1280w.webp 1280w, assets/header/ap3-1920w.webp 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicon-BaPUWzvK.png"
+      sizes="128x128"
+    />
+
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mariana Alcântara",
+        "jobTitle": "Arquiteta e Ambientação",
+        "image": "https://arquitetamariana.com.br/assets/sobre/sobre.webp",
+        "description": "Arquiteta e Ambientação, projetos residenciais",
+        "url": "https://arquitetamariana.com.br",
+        "worksFor": {
+          "@type": "LocalBusiness",
+          "name": "Arquiteta Mariana Alcântara"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Avenida Francisco Porto 151",
+          "addressLocality": "Aracaju",
+          "addressRegion": "SE",
+          "addressCountry": "BR",
+          "postalCode": "49025230"
+        },
+        "sameAs": ["https://www.instagram.com/arquiteta.mariana/"],
+        "telephone": "5579991767938"
+      }
+    </script>
+
+    <script type="module" crossorigin src="/assets/customElements-CXrv0rRX.js"></script>
+    <script type="module" crossorigin src="/assets/registerCustomElements-CYzfqtNC.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/registerCustomElements-CrG6XsiC.css">
+  </head>
+  <body>
+    <custom-header></custom-header>
+
+    <div class="page-container">
+      <main>
+        <section class="hero">
+          <div class="hero-content">
+            <h1>Projetos que unem estética, conforto e propósito</h1>
+            <p>+400 ambientes criados em todo o Brasil. Crie o seu com quem entende ⤵️</p>
+            <a href="#contact" class="hero-cta">Entrar em contato</a>
+          </div>
+        </section>
+
+        <section class="projects-preview">
+          <div class="center-content">
+            <div>
+              <div class="projects-preview-photos">
+                <img
+                  src="/assets/sala1-300w-DIA2Md57.webp"
+                  srcset="/assets/sala1-300w-DIA2Md57.webp 300w, /assets/sala1-409w-xgsBvGWH.webp 409w, /assets/sala1-768w-u2DS_tMR.webp 768w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="Projeto de sala com painéis amadeirados e mobília em linho off white"
+                />
+
+                <img
+                  src="/assets/sala2-300w-DwUeV0SE.webp"
+                  srcset="/assets/sala2-300w-DwUeV0SE.webp 300w, /assets/sala2-409w-DWj96s3_.webp 409w, /assets/sala2-768w-CtfvoggO.webp 768w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="Projeto de sala integrada com cozinha americana, painéis amadeirados e ripado, além de elementos como jardim suspenso e lustre LED."
+                />
+              </div>
+            </div>
+          </div>
+
+          <a href="./projetos.html" class="projects-link projects-link-home"
+            >VER TODOS OS PROJETOS</a
+          >
+        </section>
+
+        <section class="testimonials">
+          <div class="testimonials-header">
+            <h2>O que nossos clientes dizem</h2>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Mariana nos deixa bem à vontade, e encontra junto com o cliente o que melhor e mais funcional que atenda o cotidiano, com elegância e bom gosto, indicando bons profissionais e tratando diretamente com eles os ajustes necessários. Adorei a reforma do meu apt. Caduco cada ambiente! Gratidão!"</p>
+              <p class="testimonial-author">— Brena R.</p>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Mariana é uma arquiteta singular. Desde a elaboração do projeto até a execução, ela esteve presente em todas as etapas, garantindo que cada detalhe saísse como planejado. Sempre acessível, detalhista e comprometida com prazos e orçamentos, ela conseguiu equilibrar beleza, conforto e praticidade de maneira exemplar. O resultado final ficou exatamente como imaginávamos: funcional e elegante. Recomendo a todos o trabalho de Mariana!"</p>
+              <p class="testimonial-author">— Joana M.</p>
+            </div>
+
+                        <div class="testimonial-card">
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-text">"Nossa experiência foi excelente com o escritório da Mariana Alcântara, acompanhamento da obra todo o tempo, sempre disponível para nos atender com presteza e atenção. O resultado não poderia ser diferente, satisfação nota 10. Super recomendo."</p>
+              <p class="testimonial-author">— Glória S.</p>
+            </div>
+          </div>
+        </section>
+
+          <div class="services-header">
+            <h2>Nossos serviços</h2>
+            <h3>Soluções inteligentes para todo tipo de projeto.</h3>
+          </div>
+
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">
+                <img
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20640%20640'%3e%3c!--!Font%20Awesome%20Free%207.1.0%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202026%20Fonticons,%20Inc.--%3e%3cpath%20d='M304%2070.1C313.1%2061.9%20326.9%2061.9%20336%2070.1L568%20278.1C577.9%20286.9%20578.7%20302.1%20569.8%20312C560.9%20321.9%20545.8%20322.7%20535.9%20313.8L527.9%20306.6L527.9%20511.9C527.9%20547.2%20499.2%20575.9%20463.9%20575.9L175.9%20575.9C140.6%20575.9%20111.9%20547.2%20111.9%20511.9L111.9%20306.6L103.9%20313.8C94%20322.6%2078.9%20321.8%2070%20312C61.1%20302.2%2062%20287%2071.8%20278.1L304%2070.1zM320%20120.2L160%20263.7L160%20512C160%20520.8%20167.2%20528%20176%20528L224%20528L224%20424C224%20384.2%20256.2%20352%20296%20352L344%20352C383.8%20352%20416%20384.2%20416%20424L416%20528L464%20528C472.8%20528%20480%20520.8%20480%20512L480%20263.7L320%20120.3zM272%20528L368%20528L368%20424C368%20410.7%20357.3%20400%20344%20400L296%20400C282.7%20400%20272%20410.7%20272%20424L272%20528z'/%3e%3c/svg%3e"
+                  alt="Ícone de casa"
+                />
+              </div>
+              <h4>PROJETOS RESIDENCIAIS</h4>
+              <p>
+                Projetamos seu espaço com soluções pensadas sob medida para o
+                seu estilo de vida.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <img
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20640%20640'%3e%3c!--!Font%20Awesome%20Free%207.1.0%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202026%20Fonticons,%20Inc.--%3e%3cpath%20d='M420.9%20448C428.2%20425.7%20442.8%20405.5%20459.3%20388.1C492%20353.7%20512%20307.2%20512%20256C512%20150%20426%2064%20320%2064C214%2064%20128%20150%20128%20256C128%20307.2%20148%20353.7%20180.7%20388.1C197.2%20405.5%20211.9%20425.7%20219.1%20448L420.8%20448zM416%20496L224%20496L224%20512C224%20556.2%20259.8%20592%20304%20592L336%20592C380.2%20592%20416%20556.2%20416%20512L416%20496zM312%20176C272.2%20176%20240%20208.2%20240%20248C240%20261.3%20229.3%20272%20216%20272C202.7%20272%20192%20261.3%20192%20248C192%20181.7%20245.7%20128%20312%20128C325.3%20128%20336%20138.7%20336%20152C336%20165.3%20325.3%20176%20312%20176z'/%3e%3c/svg%3e"
+                  alt="Ícone de lâmpada"
+                />
+              </div>
+              <h4>AMBIENTAÇÃO</h4>
+              <p>
+                Elevamos o seu ambiente por meio de uma curadoria estratégica, com atenção aos detalhes para criar ambientes com identidade, conforto e significado.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <img
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20640%20640'%3e%3c!--!Font%20Awesome%20Free%207.1.0%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202026%20Fonticons,%20Inc.--%3e%3cpath%20d='M360%20160L280%20160C266.7%20160%20256%20149.3%20256%20136C256%20122.7%20266.7%20112%20280%20112L360%20112C373.3%20112%20384%20122.7%20384%20136C384%20149.3%20373.3%20160%20360%20160zM360%20208C397.1%20208%20427.6%20180%20431.6%20144L448%20144C456.8%20144%20464%20151.2%20464%20160L464%20512C464%20520.8%20456.8%20528%20448%20528L192%20528C183.2%20528%20176%20520.8%20176%20512L176%20160C176%20151.2%20183.2%20144%20192%20144L208.4%20144C212.4%20180%20242.9%20208%20280%20208L360%20208zM419.9%2096C407%2076.7%20385%2064%20360%2064L280%2064C255%2064%20233%2076.7%20220.1%2096L192%2096C156.7%2096%20128%20124.7%20128%20160L128%20512C128%20547.3%20156.7%20576%20192%20576L448%20576C483.3%20576%20512%20547.3%20512%20512L512%20160C512%20124.7%20483.3%2096%20448%2096L419.9%2096z'/%3e%3c/svg%3e"
+                  alt="Ícone de prancheta"
+                />
+              </div>
+              <h4>GESTÃO DE OBRAS</h4>
+              <p>
+                Acompanhamento completo da obra, da escolha dos fornecedores até o
+                resultado final.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="service-icon">
+                <img
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20640%20640'%3e%3c!--!Font%20Awesome%20Free%207.1.0%20by%20@fontawesome%20-%20https://fontawesome.com%20License%20-%20https://fontawesome.com/license/free%20Copyright%202026%20Fonticons,%20Inc.--%3e%3cpath%20d='M246.9%2082.3L271%2067.8C292.6%2054.8%20317.3%2048%20342.5%2048C379.3%2048%20414.7%2062.6%20440.7%2088.7L504.6%20152.6C519.6%20167.6%20528%20188%20528%20209.2L528%20240.1L547.7%20259.8L547.7%20259.8C563.3%20244.2%20588.6%20244.2%20604.3%20259.8C620%20275.4%20619.9%20300.7%20604.3%20316.4L540.3%20380.4C524.7%20396%20499.4%20396%20483.7%20380.4C468%20364.8%20468.1%20339.5%20483.7%20323.8L464%20304L433.1%20304C411.9%20304%20391.5%20295.6%20376.5%20280.6L327.4%20231.5C312.4%20216.5%20304%20196.1%20304%20174.9L304%20162.2C304%20151%20298.1%20140.5%20288.5%20134.8L246.9%20109.8C236.5%20103.6%20236.5%2088.6%20246.9%2082.4zM50.7%20466.7L272.8%20244.6L363.3%20335.1L141.2%20557.2C116.2%20582.2%2075.7%20582.2%2050.7%20557.2C25.7%20532.2%2025.7%20491.7%2050.7%20466.7z'/%3e%3c/svg%3e"
+                  alt="Ícone de martelo"
+                />
+              </div>
+              <h4>REFORMAS</h4>
+              <p>
+                Transformamos seu espaço com um planejamento preciso, extraindo
+                o melhor da sua estrutura.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <custom-cta-button></custom-cta-button>
+      </main>
+
+      <custom-footer></custom-footer>
+    </div>
+  </body>
+</html>
