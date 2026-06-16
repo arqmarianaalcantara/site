@@ -28,7 +28,7 @@ const PRINCIPLES = [
   {
     number: "IV.",
     title: "Acompanhamento integral",
-    text: "Da prancha aos últimos retoques. A presença em obra garante que o resultado entregue se pareça com o resultado prometido.",
+    text: "Da prancha aos últimos retoques. A presença em obra garante que o que foi entregue fica conforme o projeto.",
   },
 ];
 
@@ -55,35 +55,35 @@ export default function SobrePage() {
 
       {/* Portrait + biography */}
       <section className="container pb-20 sm:pb-28 lg:pb-40">
-        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 sm:gap-12 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.05fr] gap-8 sm:gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
           <Reveal>
-            <div className="relative aspect-[4/5] bg-stone-100">
+            <div className="relative aspect-[4/5] lg:aspect-[3/4] bg-stone-100 max-w-md lg:max-w-none mx-auto">
               <Image
                 src="/sobre.webp"
                 alt="Retrato de Mariana Alcântara"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 45vw"
                 priority
               />
             </div>
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="lg:sticky lg:top-32 space-y-5 sm:space-y-7">
+            <div className="space-y-5 sm:space-y-7">
               <p className="font-display text-xl sm:text-2xl lg:text-3xl text-balance leading-[1.25]">
                 Com olhar apurado, ela acompanha de perto todas as etapas dos
                 projetos, garantindo rigor em cada detalhe.
               </p>
               <p className="text-ink/70 leading-relaxed">
-                Seu interesse genuíno pelas pessoas, aliado à escuta atenta e à
-                paixão por ambientação, resulta em escolhas personalizadas que
-                revelam o melhor que a arquitetura pode oferecer.
+                A escuta atenta e a paixão por ambientação se traduzem em
+                escolhas personalizadas, que revelam o melhor que a arquitetura
+                pode oferecer.
               </p>
               <p className="text-ink/70 leading-relaxed">
-                O escritório une experiência técnica a atendimento próximo. Uma
+                O escritório une experiência técnica e atendimento próximo. Uma
                 combinação que inspira confiança e se reflete na qualidade dos
-                resultados entregues.
+                resultados.
               </p>
 
               <a

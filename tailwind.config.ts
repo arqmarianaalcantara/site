@@ -29,13 +29,13 @@ const config: Config = {
         xs: "400px",
       },
       colors: {
-        bone: "#F4EFE8",
+        bone: "#F7F4EE",
         stone: {
-          50: "#F4EFE8",
-          100: "#EAE3D8",
-          200: "#D9CFC0",
-          300: "#C9B89F",
-          400: "#A89878",
+          50: "#F7F4EE",
+          100: "#EFEAE2",
+          200: "#DED5C8",
+          300: "#CDC0AA",
+          400: "#B0A088",
           500: "#8A7A5E",
         },
         clay: "#C9B89F",
@@ -43,6 +43,11 @@ const config: Config = {
         ink: "#1A1714",
         sage: "#A6AE9A",
         accent: "#7A6B57",
+        wine: {
+          DEFAULT: "#A8232E",
+          deep: "#7A1820",
+          soft: "#C03241",
+        },
       },
       fontFamily: {
         display: ["var(--font-display)", "Georgia", "serif"],

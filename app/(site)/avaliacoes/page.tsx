@@ -127,8 +127,8 @@ export default function AvaliacoesPage() {
       {/* CTA */}
       <section className="container pb-20 sm:pb-28">
         <Reveal>
-          <div className="bg-ink text-bone px-6 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24 text-center">
-            <p className="eyebrow text-clay">Sua história começa aqui</p>
+          <div className="bg-wine text-bone px-6 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24 text-center">
+            <p className="eyebrow text-bone/70">Sua história começa aqui</p>
             <h2 className="font-display text-fluid-h1 mt-4 sm:mt-6 leading-[1.1] md:leading-[1.05] text-balance">
               Pronta para o seu projeto
               <br />
@@ -138,7 +138,7 @@ export default function AvaliacoesPage() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-bone text-ink px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-10 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-clay"
+              className="inline-flex items-center justify-center gap-3 bg-bone text-wine px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-10 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-wine-deep hover:text-bone"
             >
               Falar com Mariana
             </a>

@@ -116,21 +116,18 @@ export default async function HomePage() {
       />
 
       {/* Intro / mission */}
-      <section className="container py-20 sm:py-28 lg:py-40">
-        <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-28 items-start">
+      <section className="container min-h-[80svh] flex items-center py-16 sm:py-20 lg:py-24">
+        <div className="max-w-5xl mx-auto text-center w-full">
           <Reveal>
-            <p className="eyebrow">Manifesto</p>
-            <p className="mt-4 sm:mt-6 font-display text-xs italic text-walnut/70">
-              02 / 24
-            </p>
+            <p className="eyebrow">Como o escritório trabalha</p>
           </Reveal>
           <Reveal delay={0.15}>
-            <h2 className="font-display text-fluid-h1 leading-[1.1] md:leading-[1.05] text-balance">
+            <h2 className="font-display text-fluid-h1 leading-[1.1] md:leading-[1.05] text-balance mt-6 sm:mt-8">
               Arquitetura que escuta antes de propor. Que enxerga o ritmo da
               casa, a luz que entra pela manhã, o gesto que se repete no fim do
               dia.
             </h2>
-            <p className="mt-6 sm:mt-10 text-base sm:text-lg text-ink/70 max-w-prose">
+            <p className="mt-8 sm:mt-12 text-base sm:text-lg text-ink/70 max-w-prose mx-auto">
               No escritório, cada projeto começa por uma conversa franca. Daí
               nasce uma arquitetura honesta, com materiais reais, proporções
               equilibradas e a leveza de quem sabe o que tirar.
@@ -199,8 +196,8 @@ export default async function HomePage() {
       </section>
 
       {/* Services */}
-      <section className="bg-stone-100/60 py-20 sm:py-28 lg:py-40 mt-16 sm:mt-20">
-        <div className="container">
+      <section className="bg-stone-100/60 min-h-[85svh] flex items-center py-16 sm:py-20 lg:py-24 mt-12 sm:mt-16">
+        <div className="container w-full">
           <Reveal>
             <p className="eyebrow text-center">Escritório</p>
             <h2 className="font-display text-fluid-h1 text-center mt-3 sm:mt-4 max-w-3xl mx-auto text-balance leading-[1.1] md:leading-[1.05]">
@@ -227,7 +224,7 @@ export default async function HomePage() {
       </section>
 
       {/* Numbers */}
-      <section className="container py-20 sm:py-28 lg:py-40">
+      <section className="container py-16 sm:py-20 lg:py-28">
         <div className="grid grid-cols-2 divide-x divide-walnut/15 max-w-3xl mx-auto">
           {[
             { value: "+1000", label: "Ambientes entregues" },
@@ -246,7 +243,7 @@ export default async function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="container pb-20 sm:pb-28 lg:pb-40">
+      <section className="container py-16 sm:py-20 lg:py-24">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-16">
             <div>
@@ -337,8 +334,8 @@ export default async function HomePage() {
       {/* CTA */}
       <section className="container pb-20 sm:pb-28">
         <Reveal>
-          <div className="bg-ink text-bone px-6 sm:px-8 lg:px-20 py-14 sm:py-20 lg:py-32 text-center">
-            <p className="eyebrow text-clay">Vamos começar?</p>
+          <div className="bg-wine text-bone px-6 sm:px-8 lg:px-20 py-14 sm:py-20 lg:py-32 text-center">
+            <p className="eyebrow text-bone/70">Vamos começar?</p>
             <h2 className="font-display text-fluid-hero mt-4 sm:mt-6 leading-[1.05] sm:leading-[0.95] text-balance">
               O seu projeto começa
               <br />
@@ -348,7 +345,7 @@ export default async function HomePage() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-bone text-ink px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-12 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-clay"
+              className="inline-flex items-center justify-center gap-3 bg-bone text-wine px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-12 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-wine-deep hover:text-bone"
             >
               Solicitar orçamento
               <ArrowUpRight size={16} strokeWidth={1.5} />

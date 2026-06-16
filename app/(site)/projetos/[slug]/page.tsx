@@ -151,7 +151,7 @@ export default async function ProjectPage({ params }: Props) {
       {/* CTA */}
       <section className="container py-20 sm:py-28">
         <Reveal>
-          <div className="bg-ink text-bone px-6 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24 text-center">
+          <div className="bg-wine text-bone px-6 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-24 text-center">
             <h2 className="font-display text-fluid-h1 leading-[1.1] md:leading-[1.05] text-balance">
               Imagina o seu projeto
               <br />
@@ -161,7 +161,7 @@ export default async function ProjectPage({ params }: Props) {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-bone text-ink px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-10 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-clay"
+              className="inline-flex items-center justify-center gap-3 bg-bone text-wine px-7 sm:px-8 py-4 sm:py-5 mt-8 sm:mt-10 text-sm uppercase tracking-ultra-wide min-h-[48px] transition-all duration-300 hover:bg-wine-deep hover:text-bone"
             >
               Falar com Mariana
               <ArrowUpRight size={16} strokeWidth={1.5} />

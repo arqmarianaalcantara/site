@@ -40,7 +40,7 @@ export function SiteHeader() {
         "fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-smooth",
         scrolled || open
           ? "bg-bone/90 backdrop-blur-md border-b border-walnut/10"
-          : "bg-transparent"
+          : "bg-gradient-to-b from-ink/55 via-ink/20 to-transparent"
       )}
     >
       <div className="container flex items-center justify-between h-16 lg:h-24">
