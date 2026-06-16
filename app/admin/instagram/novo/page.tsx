@@ -14,9 +14,12 @@ export default function NovoInstagramPage() {
       </Link>
 
       <p className="eyebrow">Novo</p>
-      <h1 className="font-display text-3xl sm:text-4xl mt-3 mb-8 sm:mb-12">
-        Novo destaque do Instagram
+      <h1 className="font-display text-3xl sm:text-4xl mt-3 mb-3">
+        Adicionar destaque
       </h1>
+      <p className="text-ink/60 mb-8 sm:mb-12">
+        Cole a URL do post e pronto. O resto é com a gente.
+      </p>
 
       <div className="bg-bone border border-walnut/15 p-5 sm:p-8 lg:p-10">
         <InstagramForm />
@@ -27,7 +30,7 @@ export default function NovoInstagramPage() {
         <ol className="list-decimal list-inside space-y-1">
           <li>Abra o post, reel ou IGTV no Instagram</li>
           <li>Toque nos três pontinhos (...) e escolha "Copiar link"</li>
-          <li>Volte aqui e cole no campo acima</li>
+          <li>Cola aqui em cima e clica em "Adicionar destaque"</li>
         </ol>
       </div>
     </div>

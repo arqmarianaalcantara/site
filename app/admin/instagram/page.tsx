@@ -45,7 +45,7 @@ export default async function AdminInstagramPage() {
               className="group bg-bone border border-walnut/15 hover:border-ink transition-colors block"
             >
               <div className="relative aspect-square bg-stone-100">
-                {post.thumbnail_url && (
+                {post.thumbnail_url ? (
                   <Image
                     src={post.thumbnail_url}
                     alt={post.caption || "Post Instagram"}
@@ -53,6 +53,10 @@ export default async function AdminInstagramPage() {
                     className="object-cover"
                     sizes="(max-width: 640px) 50vw, 25vw"
                   />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-stone-300 to-walnut grid place-items-center text-bone/80 text-xs uppercase tracking-ultra-wide">
+                    Sem capa
+                  </div>
                 )}
                 <span
                   className={`absolute top-2 right-2 inline-flex items-center gap-1 px-2 py-1 text-[0.6rem] uppercase tracking-ultra-wide ${

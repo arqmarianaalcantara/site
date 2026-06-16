@@ -51,7 +51,7 @@ export type InstagramMediaType = "photo" | "video" | "carousel" | "reel";
 export interface InstagramPost {
   id: string;
   url: string;
-  thumbnail_url: string;
+  thumbnail_url: string | null;
   caption: string;
   media_type: InstagramMediaType;
   order_index: number;
