@@ -33,5 +33,5 @@ export const CONTACT = {
   phoneRaw: "5579991767938",
   address: "Av. Francisco Porto, 151, Sala 3, Grageru, Aracaju/SE",
   city: "Aracaju, SE",
-  email: "contato@arquitetamariana.com.br",
+  email: "contato@marianaarquiteta.com.br",
 };

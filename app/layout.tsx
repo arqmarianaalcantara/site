@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://arquitetamariana.com.br";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://marianaarquiteta.com.br";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
