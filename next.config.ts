@@ -4,7 +4,6 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseParsed = supabaseUrl ? new URL(supabaseUrl) : null;
 
 const config: NextConfig = {
-  outputFileTracingRoot: __dirname,
   experimental: {
     serverActions: {
       bodySizeLimit: "100mb",
