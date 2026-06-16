@@ -94,11 +94,18 @@ async function runSql(client: Client, file: string) {
 }
 
 async function main() {
-  console.log(`Migrating cloud: ${PROJECT_REF}.supabase.co\n`);
+  const args = process.argv.slice(2);
+  const files =
+    args.length > 0
+      ? args
+      : ["001_init.sql", "002_storage.sql", "003_instagram.sql"];
+  console.log(`Migrating cloud: ${PROJECT_REF}.supabase.co`);
+  console.log(`Arquivos: ${files.join(", ")}\n`);
   const client = await tryConnect();
   try {
-    await runSql(client, "001_init.sql");
-    await runSql(client, "002_storage.sql");
+    for (const file of files) {
+      await runSql(client, file);
+    }
     console.log("\n✓ Migrations concluídas.");
   } finally {
     await client.end();

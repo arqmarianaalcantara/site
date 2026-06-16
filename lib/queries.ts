@@ -1,5 +1,11 @@
 import { createClient } from "./supabase/server";
-import type { Project, ProjectImage, ProjectWithImages, Video } from "./types";
+import type {
+  InstagramPost,
+  Project,
+  ProjectImage,
+  ProjectWithImages,
+  Video,
+} from "./types";
 
 function logError(scope: string, error: unknown) {
   console.warn(`[queries] ${scope}:`, error);
@@ -130,6 +136,44 @@ export async function getAllVideos(): Promise<Video[]> {
     return (data ?? []) as Video[];
   } catch (err) {
     logError("getAllVideos", err);
+    return [];
+  }
+}
+
+export async function getPublishedInstagramPosts(
+  limit = 6
+): Promise<InstagramPost[]> {
+  if (!isSupabaseConfigured()) return [];
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("instagram_posts")
+      .select("*")
+      .eq("published", true)
+      .order("order_index", { ascending: true })
+      .order("created_at", { ascending: false })
+      .limit(limit);
+    if (error) throw error;
+    return (data ?? []) as InstagramPost[];
+  } catch (err) {
+    logError("getPublishedInstagramPosts", err);
+    return [];
+  }
+}
+
+export async function getAllInstagramPosts(): Promise<InstagramPost[]> {
+  if (!isSupabaseConfigured()) return [];
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("instagram_posts")
+      .select("*")
+      .order("order_index", { ascending: true })
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as InstagramPost[];
+  } catch (err) {
+    logError("getAllInstagramPosts", err);
     return [];
   }
 }

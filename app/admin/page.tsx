@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, FolderOpen, Video } from "lucide-react";
+import { ArrowUpRight, FolderOpen, Instagram, Video } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -7,15 +7,22 @@ export const dynamic = "force-dynamic";
 export default async function AdminDashboard() {
   const supabase = await createClient();
 
-  const [{ count: projectCount }, { count: videoCount }, { count: publishedProjects }] =
-    await Promise.all([
-      supabase.from("projects").select("*", { count: "exact", head: true }),
-      supabase.from("videos").select("*", { count: "exact", head: true }),
-      supabase
-        .from("projects")
-        .select("*", { count: "exact", head: true })
-        .eq("published", true),
-    ]);
+  const [
+    { count: projectCount },
+    { count: videoCount },
+    { count: publishedProjects },
+    { count: instagramCount },
+  ] = await Promise.all([
+    supabase.from("projects").select("*", { count: "exact", head: true }),
+    supabase.from("videos").select("*", { count: "exact", head: true }),
+    supabase
+      .from("projects")
+      .select("*", { count: "exact", head: true })
+      .eq("published", true),
+    supabase
+      .from("instagram_posts")
+      .select("*", { count: "exact", head: true }),
+  ]);
 
   return (
     <div className="p-5 sm:p-8 lg:p-14 max-w-6xl">
@@ -29,13 +36,14 @@ export default async function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-12">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-8 sm:mb-12">
         <Stat label="Projetos" value={projectCount ?? 0} />
         <Stat label="Publicados" value={publishedProjects ?? 0} />
         <Stat label="Vídeos" value={videoCount ?? 0} />
+        <Stat label="Instagram" value={instagramCount ?? 0} />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-3 gap-4">
         <Card
           href="/admin/projetos"
           title="Gerenciar projetos"
@@ -47,6 +55,12 @@ export default async function AdminDashboard() {
           title="Gerenciar vídeos"
           description="Publicar tours em vídeo dos ambientes finalizados, com capa e descrição."
           icon={Video}
+        />
+        <Card
+          href="/admin/instagram"
+          title="Destaques do Instagram"
+          description="Escolher quais posts e reels aparecem no site. Até 6 destaques na home."
+          icon={Instagram}
         />
       </div>
     </div>

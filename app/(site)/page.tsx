@@ -3,7 +3,11 @@ import Link from "next/link";
 import { ArrowUpRight, Quote, Star } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { Marquee } from "@/components/site/Marquee";
-import { getPublishedProjects } from "@/lib/queries";
+import { InstagramFeed } from "@/components/site/InstagramFeed";
+import {
+  getPublishedInstagramPosts,
+  getPublishedProjects,
+} from "@/lib/queries";
 import { CATEGORY_LABEL } from "@/lib/types";
 import { WHATSAPP_LINK } from "@/lib/utils";
 import {
@@ -40,7 +44,10 @@ const SERVICES = [
 ];
 
 export default async function HomePage() {
-  const projects = await getPublishedProjects();
+  const [projects, instagramPosts] = await Promise.all([
+    getPublishedProjects(),
+    getPublishedInstagramPosts(6),
+  ]);
   const featured = projects.slice(0, 4);
 
   return (
@@ -323,6 +330,9 @@ export default async function HomePage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Instagram */}
+      <InstagramFeed posts={instagramPosts} />
 
       {/* CTA */}
       <section className="container pb-20 sm:pb-28">

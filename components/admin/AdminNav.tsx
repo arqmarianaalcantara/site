@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import {
   ExternalLink,
   FolderOpen,
+  Instagram,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -24,6 +25,7 @@ const LINKS = [
   { href: "/admin", label: "Visão geral", icon: LayoutDashboard },
   { href: "/admin/projetos", label: "Projetos", icon: FolderOpen },
   { href: "/admin/videos", label: "Vídeos", icon: Video },
+  { href: "/admin/instagram", label: "Instagram", icon: Instagram },
 ];
 
 export function AdminNav({ userEmail }: Props) {
