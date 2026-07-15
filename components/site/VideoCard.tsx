@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { Play, Pause, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import type { Video } from "@/lib/types";
+import { extractYouTubeId, youtubeEmbedUrl } from "@/lib/youtube";
 
 interface Props {
   video: Video;
@@ -12,6 +13,8 @@ interface Props {
 
 export function VideoCard({ video }: Props) {
   const [open, setOpen] = useState(false);
+  const isYouTube = !!video.youtube_url;
+
   return (
     <>
       <button
@@ -49,13 +52,27 @@ export function VideoCard({ video }: Props) {
       </button>
 
       <AnimatePresence>
-        {open && <VideoModal video={video} onClose={() => setOpen(false)} />}
+        {open && (
+          <VideoModal
+            video={video}
+            isYouTube={isYouTube}
+            onClose={() => setOpen(false)}
+          />
+        )}
       </AnimatePresence>
     </>
   );
 }
 
-function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
+function VideoModal({
+  video,
+  isYouTube,
+  onClose,
+}: {
+  video: Video;
+  isYouTube: boolean;
+  onClose: () => void;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
 
@@ -71,13 +88,15 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
     }
   };
 
+  const ytId = video.youtube_url ? extractYouTubeId(video.youtube_url) : null;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-sm flex items-center justify-center"
+      className="fixed inset-0 z-[100] bg-ink/95 backdrop-blur-sm flex items-center justify-center px-4"
       onClick={onClose}
     >
       <button
@@ -86,7 +105,7 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
           e.stopPropagation();
           onClose();
         }}
-        className="absolute top-6 right-6 w-12 h-12 grid place-items-center text-bone hover:bg-bone/10 transition-colors"
+        className="absolute top-6 right-6 w-12 h-12 grid place-items-center text-bone hover:bg-bone/10 transition-colors z-10"
         aria-label="Fechar"
       >
         <X size={24} strokeWidth={1.5} />
@@ -96,26 +115,40 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative w-[min(94vw,720px)]"
+        className="relative w-[min(94vw,900px)]"
         onClick={(e) => e.stopPropagation()}
       >
-        <video
-          ref={ref}
-          src={video.video_url}
-          poster={video.thumbnail_url ?? undefined}
-          controls
-          autoPlay
-          playsInline
-          className="w-full max-h-[80svh] object-contain bg-black"
-        />
-        <button
-          type="button"
-          onClick={toggle}
-          className="hidden sm:inline-flex absolute -bottom-16 left-1/2 -translate-x-1/2 items-center gap-2 text-bone/80 hover:text-bone eyebrow"
-        >
-          {playing ? <Pause size={14} /> : <Play size={14} />}
-          {playing ? "Pausar" : "Reproduzir"}
-        </button>
+        {isYouTube && ytId ? (
+          <div className="w-full aspect-video bg-black">
+            <iframe
+              src={youtubeEmbedUrl(ytId, { autoplay: true })}
+              title={video.title}
+              allow="accelerated-2d-canvas; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full border-0"
+            />
+          </div>
+        ) : (
+          <>
+            <video
+              ref={ref}
+              src={video.video_url ?? undefined}
+              poster={video.thumbnail_url ?? undefined}
+              controls
+              autoPlay
+              playsInline
+              className="w-full max-h-[80svh] object-contain bg-black"
+            />
+            <button
+              type="button"
+              onClick={toggle}
+              className="hidden sm:inline-flex absolute -bottom-16 left-1/2 -translate-x-1/2 items-center gap-2 text-bone/80 hover:text-bone eyebrow"
+            >
+              {playing ? <Pause size={14} /> : <Play size={14} />}
+              {playing ? "Pausar" : "Reproduzir"}
+            </button>
+          </>
+        )}
       </motion.div>
     </motion.div>
   );

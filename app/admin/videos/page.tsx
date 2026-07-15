@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Eye, EyeOff, Play } from "lucide-react";
+import { Plus, Eye, EyeOff, Play, Youtube, Film } from "lucide-react";
 import { getAllVideos } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
@@ -74,6 +74,22 @@ export default async function AdminVideosPage() {
                 </span>
                 <span className="absolute bottom-3 left-3 w-10 h-10 grid place-items-center bg-bone/95 text-ink rounded-full">
                   <Play size={14} strokeWidth={1.5} className="translate-x-0.5" />
+                </span>
+                <span
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-1 bg-ink/85 text-bone px-2 py-1 text-[0.6rem] uppercase tracking-ultra-wide"
+                  title={video.youtube_url ? "Hospedado no YouTube" : "Upload direto"}
+                >
+                  {video.youtube_url ? (
+                    <>
+                      <Youtube size={11} strokeWidth={1.6} />
+                      YouTube
+                    </>
+                  ) : (
+                    <>
+                      <Film size={11} strokeWidth={1.6} />
+                      Upload
+                    </>
+                  )}
                 </span>
               </div>
               <div className="p-4 sm:p-5">

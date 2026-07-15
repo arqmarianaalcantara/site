@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Youtube } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { VideoForm } from "@/components/admin/VideoForm";
 import { DeleteVideoButton } from "@/components/admin/DeleteVideoButton";
 import type { Video } from "@/lib/types";
+import { extractYouTubeId, youtubeEmbedUrl } from "@/lib/youtube";
 
 export const dynamic = "force-dynamic";
 
@@ -43,14 +44,41 @@ export default async function EditVideoPage({ params }: Props) {
       </div>
 
       <div className="mt-6 sm:mt-8 bg-bone border border-walnut/15 p-4 sm:p-6">
-        <p className="eyebrow text-walnut">Visualizar</p>
-        <video
-          src={(video as Video).video_url}
-          poster={(video as Video).thumbnail_url ?? undefined}
-          controls
-          playsInline
-          className="mt-3 sm:mt-4 w-full bg-black object-contain max-h-[500px]"
-        />
+        <p className="eyebrow text-walnut flex items-center gap-2">
+          {(video as Video).youtube_url ? (
+            <>
+              <Youtube size={12} strokeWidth={1.6} />
+              Visualizar (YouTube)
+            </>
+          ) : (
+            "Visualizar"
+          )}
+        </p>
+        {(video as Video).youtube_url ? (
+          (() => {
+            const ytId = extractYouTubeId((video as Video).youtube_url!);
+            if (!ytId) return null;
+            return (
+              <div className="mt-3 sm:mt-4 w-full aspect-video bg-black">
+                <iframe
+                  src={youtubeEmbedUrl(ytId)}
+                  title={(video as Video).title}
+                  allow="accelerated-2d-canvas; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full border-0"
+                />
+              </div>
+            );
+          })()
+        ) : (
+          <video
+            src={(video as Video).video_url ?? undefined}
+            poster={(video as Video).thumbnail_url ?? undefined}
+            controls
+            playsInline
+            className="mt-3 sm:mt-4 w-full bg-black object-contain max-h-[500px]"
+          />
+        )}
       </div>
 
       <section className="mt-8 sm:mt-12 bg-bone border border-red-700/30 p-5 sm:p-8">

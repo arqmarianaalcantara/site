@@ -10,16 +10,30 @@ const config: NextConfig = {
     },
   },
   images: {
-    remotePatterns: supabaseParsed
-      ? [
-          {
-            protocol: supabaseParsed.protocol.replace(":", "") as "http" | "https",
-            hostname: supabaseParsed.hostname,
-            port: supabaseParsed.port || undefined,
-            pathname: "/storage/v1/object/public/**",
-          },
-        ]
-      : [],
+    remotePatterns: [
+      ...(supabaseParsed
+        ? [
+            {
+              protocol: supabaseParsed.protocol.replace(":", "") as
+                | "http"
+                | "https",
+              hostname: supabaseParsed.hostname,
+              port: supabaseParsed.port || undefined,
+              pathname: "/storage/v1/object/public/**",
+            },
+          ]
+        : []),
+      {
+        protocol: "https" as const,
+        hostname: "img.youtube.com",
+        pathname: "/vi/**",
+      },
+      {
+        protocol: "https" as const,
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
+    ],
     formats: ["image/avif", "image/webp"],
   },
 };

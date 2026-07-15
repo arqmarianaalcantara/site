@@ -37,7 +37,8 @@ export interface Video {
   id: string;
   title: string;
   description: string | null;
-  video_url: string;
+  video_url: string | null;
+  youtube_url: string | null;
   thumbnail_url: string | null;
   duration: number | null;
   order_index: number;

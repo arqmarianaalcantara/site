@@ -4,6 +4,15 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import {
+  downloadYouTubeThumbnail,
+  extractYouTubeId,
+  isValidYouTubeUrl,
+} from "@/lib/youtube";
+
+type ActionResult =
+  | { error: string; success?: never }
+  | { success: true; error?: never; id?: string };
 
 const VideoSchema = z.object({
   title: z.string().min(2, "Título obrigatório"),
@@ -27,11 +36,56 @@ interface UploadFile {
   base64: string;
 }
 
+interface VideoMetadata {
+  title: string;
+  description: string;
+  order_index: number;
+  published: boolean;
+}
+
+async function uploadBufferToVideos(
+  supabase: Awaited<ReturnType<typeof requireAuth>>,
+  buffer: Buffer,
+  contentType: string,
+  folder: string
+): Promise<string | null> {
+  const ext =
+    contentType.split("/")[1]?.split(";")[0]?.replace("jpeg", "jpg") || "jpg";
+  const path = `${folder}/${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage
+    .from("videos")
+    .upload(path, buffer, { contentType, upsert: false });
+  if (error) {
+    console.warn("[videos] upload failed:", error.message);
+    return null;
+  }
+  const { data } = supabase.storage.from("videos").getPublicUrl(path);
+  return data.publicUrl;
+}
+
+async function uploadThumbnailFile(
+  supabase: Awaited<ReturnType<typeof requireAuth>>,
+  file: UploadFile
+): Promise<string | null> {
+  const buffer = Buffer.from(file.base64, "base64");
+  return uploadBufferToVideos(supabase, buffer, file.type, "thumbs");
+}
+
+async function uploadVideoFile(
+  supabase: Awaited<ReturnType<typeof requireAuth>>,
+  file: UploadFile
+): Promise<string | null> {
+  const buffer = Buffer.from(file.base64, "base64");
+  return uploadBufferToVideos(supabase, buffer, file.type, "files");
+}
+
 export async function createVideo(
-  metadata: { title: string; description: string; order_index: number; published: boolean },
-  videoFile: UploadFile,
+  metadata: VideoMetadata,
+  source:
+    | { kind: "upload"; videoFile: UploadFile }
+    | { kind: "youtube"; youtubeUrl: string },
   thumbnailFile?: UploadFile | null
-) {
+): Promise<ActionResult> {
   const supabase = await requireAuth();
 
   const parsed = VideoSchema.safeParse(metadata);
@@ -39,38 +93,42 @@ export async function createVideo(
     return { error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
   }
 
-  // Upload do vídeo
-  const videoExt = videoFile.name.split(".").pop()?.toLowerCase() || "mp4";
-  const videoPath = `${crypto.randomUUID()}.${videoExt}`;
-  const videoBuffer = Buffer.from(videoFile.base64, "base64");
-
-  const { error: vErr } = await supabase.storage
-    .from("videos")
-    .upload(videoPath, videoBuffer, {
-      contentType: videoFile.type,
-      upsert: false,
-    });
-
-  if (vErr) return { error: `Falha no upload do vídeo: ${vErr.message}` };
-
-  const { data: vPub } = supabase.storage.from("videos").getPublicUrl(videoPath);
-
-  // Upload da thumbnail (opcional)
+  let videoUrl: string | null = null;
+  let youtubeUrl: string | null = null;
   let thumbnailUrl: string | null = null;
-  if (thumbnailFile) {
-    const tExt = thumbnailFile.name.split(".").pop()?.toLowerCase() || "webp";
-    const tPath = `thumbs/${crypto.randomUUID()}.${tExt}`;
-    const tBuffer = Buffer.from(thumbnailFile.base64, "base64");
-    const { error: tErr } = await supabase.storage
-      .from("videos")
-      .upload(tPath, tBuffer, {
-        contentType: thumbnailFile.type,
-        upsert: false,
-      });
-    if (!tErr) {
-      const { data: tPub } = supabase.storage.from("videos").getPublicUrl(tPath);
-      thumbnailUrl = tPub.publicUrl;
+
+  if (source.kind === "youtube") {
+    const cleaned = source.youtubeUrl.trim();
+    if (!isValidYouTubeUrl(cleaned)) {
+      return {
+        error:
+          "URL de YouTube inválida. Use o link do watch, youtu.be, embed ou shorts.",
+      };
     }
+    youtubeUrl = cleaned;
+    const ytId = extractYouTubeId(cleaned)!;
+    // Baixa thumbnail automática do YouTube se a usuária não subiu uma manual
+    if (!thumbnailFile) {
+      const downloaded = await downloadYouTubeThumbnail(ytId);
+      if (downloaded) {
+        thumbnailUrl = await uploadBufferToVideos(
+          supabase,
+          downloaded.buffer,
+          downloaded.contentType,
+          "thumbs"
+        );
+      }
+    }
+  } else {
+    if (!source.videoFile?.base64) {
+      return { error: "Selecione um arquivo de vídeo" };
+    }
+    videoUrl = await uploadVideoFile(supabase, source.videoFile);
+    if (!videoUrl) return { error: "Falha no upload do vídeo" };
+  }
+
+  if (thumbnailFile && !thumbnailUrl) {
+    thumbnailUrl = await uploadThumbnailFile(supabase, thumbnailFile);
   }
 
   const { data, error } = await supabase
@@ -78,7 +136,8 @@ export async function createVideo(
     .insert({
       title: parsed.data.title,
       description: parsed.data.description,
-      video_url: vPub.publicUrl,
+      video_url: videoUrl,
+      youtube_url: youtubeUrl,
       thumbnail_url: thumbnailUrl,
       order_index: parsed.data.order_index,
       published: parsed.data.published,
@@ -95,9 +154,14 @@ export async function createVideo(
 
 export async function updateVideo(
   id: string,
-  metadata: { title: string; description: string; order_index: number; published: boolean },
-  thumbnailFile?: UploadFile | null
-) {
+  metadata: VideoMetadata,
+  changes: {
+    replaceVideoFile?: UploadFile | null;
+    newYoutubeUrl?: string | null;
+    thumbnailFile?: UploadFile | null;
+    refetchYouTubeThumbnail?: boolean;
+  } = {}
+): Promise<ActionResult> {
   const supabase = await requireAuth();
 
   const parsed = VideoSchema.safeParse(metadata);
@@ -112,20 +176,48 @@ export async function updateVideo(
     published: parsed.data.published,
   };
 
-  if (thumbnailFile) {
-    const tExt = thumbnailFile.name.split(".").pop()?.toLowerCase() || "webp";
-    const tPath = `thumbs/${crypto.randomUUID()}.${tExt}`;
-    const tBuffer = Buffer.from(thumbnailFile.base64, "base64");
-    const { error: tErr } = await supabase.storage
-      .from("videos")
-      .upload(tPath, tBuffer, {
-        contentType: thumbnailFile.type,
-        upsert: false,
-      });
-    if (!tErr) {
-      const { data: tPub } = supabase.storage.from("videos").getPublicUrl(tPath);
-      updates.thumbnail_url = tPub.publicUrl;
+  // Troca de fonte: se veio YouTube URL nova, limpa video_url e vice-versa
+  if (changes.newYoutubeUrl !== undefined && changes.newYoutubeUrl !== null) {
+    const cleaned = changes.newYoutubeUrl.trim();
+    if (cleaned === "") {
+      // Explicitamente vazio significa "manter como está"
+    } else {
+      if (!isValidYouTubeUrl(cleaned)) {
+        return { error: "URL de YouTube inválida" };
+      }
+      updates.youtube_url = cleaned;
+      updates.video_url = null;
+
+      if (changes.refetchYouTubeThumbnail && !changes.thumbnailFile) {
+        const ytId = extractYouTubeId(cleaned)!;
+        const downloaded = await downloadYouTubeThumbnail(ytId);
+        if (downloaded) {
+          const uploaded = await uploadBufferToVideos(
+            supabase,
+            downloaded.buffer,
+            downloaded.contentType,
+            "thumbs"
+          );
+          if (uploaded) updates.thumbnail_url = uploaded;
+        }
+      }
     }
+  }
+
+  if (changes.replaceVideoFile?.base64) {
+    const uploaded = await uploadVideoFile(supabase, changes.replaceVideoFile);
+    if (uploaded) {
+      updates.video_url = uploaded;
+      updates.youtube_url = null;
+    }
+  }
+
+  if (changes.thumbnailFile?.base64) {
+    const uploaded = await uploadThumbnailFile(
+      supabase,
+      changes.thumbnailFile
+    );
+    if (uploaded) updates.thumbnail_url = uploaded;
   }
 
   const { error } = await supabase.from("videos").update(updates).eq("id", id);
@@ -136,7 +228,7 @@ export async function updateVideo(
   return { success: true };
 }
 
-export async function deleteVideo(id: string) {
+export async function deleteVideo(id: string): Promise<ActionResult> {
   const supabase = await requireAuth();
 
   const { data: video } = await supabase
