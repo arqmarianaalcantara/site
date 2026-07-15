@@ -13,7 +13,22 @@ interface Props {
 
 export function VideoCard({ video }: Props) {
   const [open, setOpen] = useState(false);
+  const [ytThumbError, setYtThumbError] = useState(false);
   const isYouTube = !!video.youtube_url;
+  const ytId = video.youtube_url ? extractYouTubeId(video.youtube_url) : null;
+
+  // Preview: prioridade → thumbnail salva → capa YouTube (maxres/hq) → primeiro frame do upload
+  const savedThumb = video.thumbnail_url;
+  const ytThumb =
+    ytId && !ytThumbError
+      ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
+      : ytId
+        ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
+        : null;
+  const uploadPreview =
+    !isYouTube && video.video_url
+      ? `${video.video_url}#t=0.5`
+      : null;
 
   return (
     <>
@@ -22,13 +37,29 @@ export function VideoCard({ video }: Props) {
         onClick={() => setOpen(true)}
         className="group relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full overflow-hidden bg-stone-100 text-left"
       >
-        {video.thumbnail_url ? (
+        {savedThumb ? (
           <Image
-            src={video.thumbnail_url}
+            src={savedThumb}
             alt={video.title}
             fill
             className="object-cover transition-transform duration-700 ease-smooth group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        ) : ytThumb ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={ytThumb}
+            alt={video.title}
+            onError={() => setYtThumbError(true)}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-105"
+          />
+        ) : uploadPreview ? (
+          <video
+            src={uploadPreview}
+            preload="metadata"
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-700 ease-smooth group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 bg-walnut" />
